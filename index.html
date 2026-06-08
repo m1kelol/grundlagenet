@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lern-Website: Grundlagen der Elektrotechnik</title>
+    <!-- CSS link -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Main Container -->
+    <div class="app-container">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-logo">ET</div>
+                <div class="brand-info">
+                    <h1>Grundlagen ET</h1>
+                    <p>Klassenarbeit Vorbereitung</p>
+                </div>
+            </div>
+
+            <!-- Progress Widget -->
+            <div class="progress-widget">
+                <div class="progress-header">
+                    <span>Dein Fortschritt</span>
+                    <span id="progress-percent">0%</span>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar-fill" id="progress-bar-fill"></div>
+                </div>
+                <div class="progress-stats">
+                    <span>Kapitel gelesen:</span>
+                    <span id="progress-count">0/7</span>
+                </div>
+            </div>
+
+            <!-- Nav Menu -->
+            <nav>
+                <div class="nav-section-title">Übersicht</div>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-section="dashboard">
+                            <span class="nav-link-left">
+                                <span class="nav-indicator" style="background-color: var(--accent-gold); border-color: var(--accent-gold);"></span>
+                                Dashboard
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="nav-section-title">Lernkapitel</div>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a class="nav-link" data-section="kapitel1">
+                            <span class="nav-link-left">
+                                <span class="nav-indicator"></span>
+                                1. Die Basics (Strom)
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-section="kapitel2">
+                            <span class="nav-link-left">
+                                <span class="nav-indicator"></span>
+                                2. Spannung & Quellen
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-section="kapitel3">
+                            <span class="nav-link-left">
+                                <span class="nav-indicator"></span>
+                                3. Widerstand & Leitwert
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-section="kapitel4">
+                            <span class="nav-link-left">
+                                <span class="nav-indicator"></span>
+                                4. Energie & Leistung
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-section="kapitel5">
+                            <span class="nav-link-left">
+                                <span class="nav-indicator"></span>
+                                5. Wirkungsgrad
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-section="kapitel6">
+                            <span class="nav-link-left">
+                                <span class="nav-indicator"></span>
+                                6. Leitungswiderstand
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-section="kapitel7">
+                            <span class="nav-link-left">
+                                <span class="nav-indicator"></span>
+                                7. Wechselstrom
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="nav-section-title">Praxis & Test</div>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a class="nav-link" data-section="aufgaben">
+                            <span class="nav-link-left">
+                                <span class="nav-indicator" style="border-color: var(--accent-gold);"></span>
+                                Übungsaufgaben
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-section="quiz">
+                            <span class="nav-link-left">
+                                <span class="nav-indicator" style="border-color: var(--accent-color);"></span>
+                                Übungs-Quiz
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div style="margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--accent-light);">
+                    <button class="btn btn-secondary" onclick="resetAllProgress()" style="width: 100%; font-size: 0.8rem; padding: 0.5rem;">
+                        Fortschritt löschen
+                    </button>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Top Bar for Mobile -->
+        <header class="top-bar">
+            <button class="menu-toggle" id="menu-toggle">☰</button>
+            <span style="font-family: var(--font-title); font-weight: 700;">Elektrotechnik lernen</span>
+            <div style="width: 24px;"></div> <!-- Spacer -->
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+
+            <!-- ----------------------------------------------------------- -->
+            <!-- DASHBOARD SECTION -->
+            <!-- ----------------------------------------------------------- -->
+            <section id="dashboard" class="content-section active">
+                <div class="dashboard-grid">
+                    <div class="welcome-banner">
+                        <h3>Hi! Bereit für Elektrotechnik?</h3>
+                        <p>Diese Lernwebsite führt dich Schritt für Schritt durch alle Grundlagen, die du für deine Klassenarbeit brauchst. Keine Vorkenntnisse nötig!</p>
+                    </div>
+                    <div class="stats-card">
+                        <h4 style="margin-top:0; border-bottom:1px solid var(--accent-light); padding-bottom:0.5rem;">Dein Status</h4>
+                        <div class="stat-item" style="flex-direction: column; align-items: stretch; gap: 0.5rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                                <span class="stat-label">Lernfortschritt:</span>
+                                <span class="stat-value" id="db-progress-text">0% abgeschlossen</span>
+                            </div>
+                            <div class="progress-bar-container" style="height: 6px; width: 100%;">
+                                <div class="progress-bar-fill" id="db-progress-fill"></div>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Gelöste Aufgaben:</span>
+                            <span class="stat-value" id="db-solved-exercises">0 / 10</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Quiz Highscore:</span>
+                            <span class="stat-value" id="db-best-score">0 / 10</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Letzter Test:</span>
+                            <span class="stat-value" id="db-latest-attempt">Keine</span>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Wähle deinen Einstieg</h3>
+                <div class="grid-2">
+                    <div class="card" style="cursor: pointer;" onclick="switchSection('kapitel1')">
+                        <h4 style="margin-top:0;">📚 Grundlagen lernen</h4>
+                        <p>Beginne mit den absoluten Basics. Was ist Ladung? Wie fließen Elektronen? Lerne alles von Grund auf.</p>
+                        <span class="btn btn-secondary" style="font-size:0.85rem; padding:0.5rem 1rem;">Kapitel 1 starten</span>
+                    </div>
+                    <div class="card" style="cursor: pointer;" onclick="switchSection('quiz')">
+                        <h4 style="margin-top:0;">📝 Quiz starten</h4>
+                        <p>Teste dein Wissen! Das Quiz stellt dir 10 zufällige Fragen aus dem gesamten Stoff und zeigt dir detaillierte Erklärungen.</p>
+                        <span class="btn btn-primary" style="font-size:0.85rem; padding:0.5rem 1rem;">Quiz spielen</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h4 style="margin-top:0;">💡 Tipps für die Klassenarbeit</h4>
+                    <ul>
+                        <li><strong>Achte auf Einheiten:</strong> Rechne Kilo-, Mega- oder Milli-Werte immer zuerst in die Basiseinheiten (Volt, Ampere, Ohm) um, bevor du rechnest!</li>
+                        <li><strong>Formeln umstellen:</strong> Präge dir das Ohm'sche Dreieck gut ein. Es hilft dir, jede Formel im Schlaf umzustellen.</li>
+                        <li><strong>Wechselstrom-Kenngrößen:</strong> Verwechsle niemals den Spitzenwert (maximaler Ausschlag) mit dem Effektivwert (äquivalente Wärmewirkung).</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- ----------------------------------------------------------- -->
+            <!-- CHAPTER 1: BASICS -->
+            <!-- ----------------------------------------------------------- -->
+            <section id="kapitel1" class="content-section">
+                <h2>Kapitel 1: Die absoluten Basics (Was ist Strom?)</h2>
+                <p class="intro-lead">Um zu verstehen, wie elektrische Geräte funktionieren, müssen wir ganz tief in die Materie eintauchen – auf die Ebene der Atome.</p>
+
+                <div class="card">
+                    <h3 style="margin-top:0;">Das Atommodell</h3>
+                    <p>Alles um uns herum besteht aus winzigen Bausteinen, den <strong>Atomen</strong>. Ein Atom lässt sich vereinfacht in zwei Bereiche aufteilen:</p>
+                    <ul>
+                        <li><strong>Der Atomkern:</strong> Er befindet sich im Zentrum. Dort liegen die positiv geladenen <strong>Protonen</strong> und die elektrisch neutralen <strong>Neutronen</strong>. Der Kern ist schwer und unbeweglich.</li>
+                        <li><strong>Die Atomhülle:</strong> Sie umgibt den Kern. Hier kreisen die extrem leichten, negativ geladenen <strong>Elektronen</strong>.</li>
+                    </ul>
+                    <p>Normalerweise ist ein Atom nach außen hin neutral: Es hat genau so viele positive Protonen im Kern wie negative Elektronen in der Hülle. Die Ladungen heben sich auf.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">🔌 Elektrische Ladung & Strom</div>
+                    <p>Unter bestimmten Bedingungen können Elektronen aus ihrer Hülle gelöst werden (z.B. durch Reibung). Dadurch entsteht ein Ladungsunterschied:</p>
+                    <ul>
+                        <li>Wo Elektronen weggenommen wurden, herrscht ein <strong>Elektronenmangel</strong>. Die Stelle ist <strong>positiv geladen</strong>.</li>
+                        <li>Wo die Elektronen hinzugefügt wurden, herrscht ein <strong>Elektronenüberschuss</strong>. Die Stelle ist <strong>negativ geladen</strong>.</li>
+                    </ul>
+                    <div class="info-box info">
+                        <span class="info-box-icon">💡</span>
+                        <div class="info-box-content">
+                            <h5>Was ist elektrischer Strom?</h5>
+                            <p style="margin-bottom:0;">Elektrischer Strom ist nichts anderes als die <strong>gerichtete Bewegung von freien Ladungsträgern (Elektronen)</strong> durch einen Stoff (z.B. durch einen Kupferdraht). Er fließt nur, wenn ein geschlossener Stromkreis vorliegt und eine treibende Kraft (Spannung) vorhanden ist.</p>
+                        </div>
+                    </div>
+                    
+                    <h4>Die Stromstärke I</h4>
+                    <p>Die Stromstärke gibt an, wie viele Elektronen in einer bestimmten Zeit durch den Querschnitt eines Leiters fließen.
+                    Das Formelzeichen ist <strong>I</strong>. Die physikalische Einheit ist das <strong>Ampere (A)</strong>.</p>
+
+                    <h4>Die Stromrichtung</h4>
+                    <p>Hier unterscheidet man zwischen zwei Richtungen:</p>
+                    <ul>
+                        <li><strong>Physikalische Stromrichtung:</strong> Da Elektronen negativ geladen sind, werden sie vom negativen Pol (Überschuss) abgestoßen und fließen zum positiven Pol (Mangel). Also: <strong>von Minus nach Plus</strong>.</li>
+                        <li><strong>Technische Stromrichtung:</strong> Bevor man wusste, dass sich Elektronen bewegen, legte man historisch fest, dass Strom von der positiv geladenen Kugel zur negativen fließt. Daher gilt in allen Schaltplänen: <strong>von Plus nach Minus</strong>.</li>
+                    </ul>
+                </div>
+
+                <!-- SI Prefixes Helper -->
+                <div class="card">
+                    <div class="card-title">🔢 Wichtig: Die Vorsatzzeichen (SI-Präfixe)</div>
+                    <p>In der Elektrotechnik hast du es oft mit sehr großen oder sehr kleinen Zahlen zu tun. Anstatt "0,005 Ampere" schreibt man lieber "5 Milliampere". Hier ist die Tabelle der wichtigsten Vorsätze:</p>
+                    
+                    <table style="width:100%; border-collapse: collapse; margin-bottom:1.5rem;">
+                        <thead>
+                            <tr style="background-color: var(--bg-secondary); border-bottom:2px solid var(--accent-light);">
+                                <th style="padding:0.75rem; text-align:left;">Präfix</th>
+                                <th style="padding:0.75rem; text-align:left;">Symbol</th>
+                                <th style="padding:0.75rem; text-align:left;">Faktor</th>
+                                <th style="padding:0.75rem; text-align:left;">Beispiel</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border-bottom:1px solid var(--accent-light);">
+                                <td style="padding:0.75rem;">Mega</td>
+                                <td style="padding:0.75rem;"><strong>M</strong></td>
+                                <td style="padding:0.75rem;">10<sup>6</sup> = 1.000.000</td>
+                                <td style="padding:0.75rem;">2 MΩ = 2.000.000 Ω</td>
+                            </tr>
+                            <tr style="border-bottom:1px solid var(--accent-light);">
+                                <td style="padding:0.75rem;">Kilo</td>
+                                <td style="padding:0.75rem;"><strong>k</strong></td>
+                                <td style="padding:0.75rem;">10<sup>3</sup> = 1.000</td>
+                                <td style="padding:0.75rem;">15 kV = 15.000 V</td>
+                            </tr>
+                            <tr style="border-bottom:1px solid var(--accent-light);">
+                                <td style="padding:0.75rem;">(Basis)</td>
+                                <td style="padding:0.75rem;">-</td>
+                                <td style="padding:0.75rem;">1</td>
+                                <td style="padding:0.75rem;">230 V, 5 A</td>
+                            </tr>
+                            <tr style="border-bottom:1px solid var(--accent-light);">
+                                <td style="padding:0.75rem;">Milli</td>
+                                <td style="padding:0.75rem;"><strong>m</strong></td>
+                                <td style="padding:0.75rem;">10<sup>-3</sup> = 0,001 (Tausendstel)</td>
+                                <td style="padding:0.75rem;">50 mA = 0,05 A</td>
+                            </tr>
+                            <tr style="border-bottom:1px solid var(--accent-light);">
+                                <td style="padding:0.75rem;">Mikro</td>
+                                <td style="padding:0.75rem;"><strong>µ</strong></td>
+                                <td style="padding:0.75rem;">10<sup>-6</sup> = 0,000001 (Millionstel)</td>
+                                <td style="padding:0.75rem;">50 µV = 0,00005 V</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="interactive-tool">
+                        <h4 style="margin-top:0;">Einheiten-Umrechner</h4>
+                        <div class="tool-controls" style="flex-direction:row; flex-wrap:wrap;">
+                            <div class="form-group" style="flex:1; min-width:120px;">
+                                <label>Wert</label>
+                                <input type="number" id="conv-val" value="50" oninput="runUnitConvert()">
+                            </div>
+                            <div class="form-group" style="flex:1; min-width:100px;">
+                                <label>Von</label>
+                                <select id="conv-from" onchange="runUnitConvert()">
+                                    <option value="M">Mega (M)</option>
+                                    <option value="k">Kilo (k)</option>
+                                    <option value="" selected>Basis (z.B. A)</option>
+                                    <option value="m">Milli (m)</option>
+                                    <option value="u">Mikro (µ)</option>
+                                </select>
+                            </div>
+                            <div class="form-group" style="flex:1; min-width:100px;">
+                                <label>Zu</label>
+                                <select id="conv-to" onchange="runUnitConvert()">
+                                    <option value="M">Mega (M)</option>
+                                    <option value="k">Kilo (k)</option>
+                                    <option value="">Basis (z.B. A)</option>
+                                    <option value="m" selected>Milli (m)</option>
+                                    <option value="u">Mikro (µ)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="tool-result" id="conv-result" style="margin-top:1rem;">
+                            <strong>Ergebnis:</strong> 50 A = 50.000 mA
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chapter-footer">
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="chk-chapter-1" class="chapter-read-checkbox" data-chapter="1">
+                        <div class="checkbox-custom"></div>
+                        Als gelesen markieren
+                    </label>
+                    <button class="btn btn-primary" onclick="switchSection('kapitel2')">Kapitel 2: Spannung ➔</button>
+                </div>
+            </section>
+
+            <!-- ----------------------------------------------------------- -->
+            <!-- CHAPTER 2: VOLTAGE -->
+            <!-- ----------------------------------------------------------- -->
+            <section id="kapitel2" class="content-section">
+                <h2>Kapitel 2: Spannung & Spannungsquellen (U)</h2>
+                <p class="intro-lead">Spannung ist der Antrieb des Stroms. Ohne eine elektrische Spannung kann sich kein einziges Elektron durch das Kabel bewegen.</p>
+
+                <div class="card">
+                    <h3 style="margin-top:0;">Das Wassermodell (Die Analogie)</h3>
+                    <p>Stell dir zwei Wasserbehälter vor, die über ein Rohr miteinander verbunden sind:</p>
+                    <ul>
+                        <li>Wenn beide Behälter gleich hoch mit Wasser gefüllt sind, fließt kein Wasser durch das Rohr. Es herrscht kein Druckunterschied.</li>
+                        <li>Füllst du einen Behälter höher als den anderen, entsteht ein <strong>Druckunterschied</strong>. Das Wasser strömt so lange von der höheren Seite zur niedrigeren, bis beide Stände wieder gleich hoch sind.</li>
+                    </ul>
+                    <p>In der Elektrotechnik entspricht:</p>
+                    <ul>
+                        <li>Der <strong>Wasserdruck</strong> der <strong>elektrischen Spannung</strong>.</li>
+                        <li>Der <strong>Wasserfluss</strong> der <strong>elektrischen Stromstärke</strong>.</li>
+                    </ul>
+                    <div class="formula-block">
+                        U<sub>21</sub> = φ<sub>2</sub> - φ<sub>1</sub>
+                        <div class="formula-legend">Spannung U = Potentialdifferenz zwischen Potential 2 und Potential 1</div>
+                    </div>
+                    <p>Das Formelzeichen der Spannung ist <strong>U</strong>. Die Einheit ist das <strong>Volt (V)</strong>.
+                    Der <strong>Spannungspfeil</strong> wird in Schaltplänen eingezeichnet und weist immer vom höheren zum niedrigeren Potential (also von Plus nach Minus).</p>
+                </div>
+
+                <!-- Voltage generation -->
+                <div class="card">
+                    <div class="card-title">🔋 Die 6 Arten der Spannungserzeugung</div>
+                    <p>Elektrische Spannung entsteht, wenn Ladungen getrennt werden. Das kann durch verschiedene physikalische Effekte geschehen. Die PDF listet 6 grundlegende Arten:</p>
+                    
+                    <ol style="padding-left:1.5rem; margin-bottom:1.5rem;">
+                        <li style="margin-bottom:0.75rem;">
+                            <strong>Induktion (Magnetismus & Bewegung):</strong>
+                            <br>Eine Spule wird in einem Magnetfeld bewegt (oder ein Magnet wird in einer Spule bewegt).
+                            <br><em>Anwendung:</em> Generatoren in Kraftwerken, Fahrrad-Dynamo, Lichtmaschine im Auto.
+                        </li>
+                        <li style="margin-bottom:0.75rem;">
+                            <strong>Chemische Wirkung:</strong>
+                            <br>Zwei unterschiedliche Metalle befinden sich in einer leitenden Flüssigkeit (Elektrolyt).
+                            <br><em>Anwendung:</em>
+                            <ul>
+                                <li><em>Primärelemente (Batterien):</em> Können nur einmal entladen und müssen dann entsorgt werden.</li>
+                                <li><em>Sekundärelemente (Akkus):</em> Sind nach Entladung wieder aufladbar (z.B. Lithium-Ionen-Akku, Bleiakku im Auto).</li>
+                            </ul>
+                        </li>
+                        <li style="margin-bottom:0.75rem;">
+                            <strong>Licht (Photovoltaik):</strong>
+                            <br>Lichteinstrahlung (Photonen) auf Halbleitermaterialien wie Germanium oder Silizium löst Elektronen heraus.
+                            <br><em>Anwendung:</em> Solarzellen, Taschenrechner mit Solarzelle.
+                        </li>
+                        <li style="margin-bottom:0.75rem;">
+                            <strong>Kristallverformung (Piezo-Elektrizität):</strong>
+                            <br>Druck oder Zug auf bestimmte Kristalle (z.B. Quarz) trennt Ladungen mechanisch.
+                            <br><em>Anwendung:</em> Elektrische Feuerzeuge (beim Klicken schlägt ein Bolzen auf den Kristall), Tonabnehmer bei Plattenspielern.
+                        </li>
+                        <li style="margin-bottom:0.75rem;">
+                            <strong>Wärme (Thermoelektrizität):</strong>
+                            <br>Zwei unterschiedliche Metalle (z.B. Kupfer und Konstantan) werden an ihrer Kontaktstelle erhitzt.
+                            <br><em>Anwendung:</em> Thermoelemente zur Temperaturmessung (z.B. in Öfen).
+                        </li>
+                        <li style="margin-bottom:0.75rem;">
+                            <strong>Reibung (Elektrostatik):</strong>
+                            <br>Reibung zweier Nichtleiter trennt Elektronen oberflächlich ab.
+                            <br><em>Vorkommen in der Natur:</em> Gewitterblitz, Knistern beim Ausziehen eines Pullovers.
+                        </li>
+                    </ol>
+                </div>
+
+                <!-- Voltage measurement circuit -->
+                <div class="card">
+                    <div class="card-title">🔌 Spannungsmessung</div>
+                    <p>Ein Spannungsmessgerät (Voltmeter) wird immer <strong>parallel</strong> zum Verbraucher (z.B. einer Lampe) geschaltet. Eine Auftrennung des Stromkreises ist nicht notwendig.</p>
+                    
+                    <svg class="circuit-svg" viewBox="0 0 300 200">
+                        <!-- Power source -->
+                        <line x1="50" y1="100" x2="50" y2="70" stroke="#3E2E20" stroke-width="2"/>
+                        <line x1="40" y1="70" x2="60" y2="70" stroke="#3E2E20" stroke-width="3"/>
+                        <line x1="45" y1="60" x2="55" y2="60" stroke="#3E2E20" stroke-width="1.5"/>
+                        <line x1="50" y1="60" x2="50" y2="30" stroke="#3E2E20" stroke-width="2"/>
+                        <text x="30" y="55" fill="#3E2E20" font-weight="700">+</text>
+                        <text x="30" y="85" fill="#3E2E20" font-weight="700">-</text>
+                        
+                        <!-- Wires -->
+                        <path d="M 50,30 L 220,30 L 220,70" fill="none" stroke="#3E2E20" stroke-width="2"/>
+                        <path d="M 50,100 L 220,100 L 220,90" fill="none" stroke="#3E2E20" stroke-width="2"/>
+                        
+                        <!-- Resistor load -->
+                        <rect x="200" y="70" width="40" height="20" fill="#FFFFFF" stroke="#3E2E20" stroke-width="2"/>
+                        <text x="212" y="84" fill="#3E2E20" font-size="10">R</text>
+
+                        <!-- Parallel Voltmeter -->
+                        <path d="M 150,30 L 150,60" fill="none" stroke="#3E2E20" stroke-width="2"/>
+                        <path d="M 150,100 L 150,140 M 150,140 L 220,140 M 220,140 L 220,90" fill="none" stroke="#3E2E20" stroke-dasharray="3" stroke-width="1.5"/>
+                        <!-- Line connections dot -->
+                        <circle cx="150" cy="30" r="3" fill="#3E2E20"/>
+                        <circle cx="220" cy="90" r="3" fill="#3E2E20"/>
+                        
+                        <circle cx="150" cy="80" r="20" fill="#FFFFFF" stroke="#8C6239" stroke-width="2"/>
+                        <text x="144" y="86" fill="#8C6239" font-weight="bold" font-size="16">V</text>
+                        <text x="100" y="75" fill="#8C6239" font-size="12">Voltmeter</text>
+                        <text x="100" y="92" fill="#8C6239" font-size="9">(Parallel)</text>
+                    </svg>
+
+                    <h4>Wichtige Spannungs-Richtwerte:</h4>
+                    <p>Um ein Gefühl für Spannungsgrößen zu bekommen (aus den Arbeitsblättern):</p>
+                    <ul>
+                        <li>Übertragungsnetz: <strong>400.000 V (400 kV)</strong></li>
+                        <li>Bahn-Fahrleitung: <strong>15.000 V (15 kV)</strong></li>
+                        <li>Hausanschluss (Steckdose): <strong>230 V</strong> (bzw. Drehstrom 400 V)</li>
+                        <li>Fahrraddynamo: <strong>6 V</strong></li>
+                        <li>Bleiakku-Zelle: <strong>2 V</strong></li>
+                    </ul>
+                </div>
+
+                <div class="chapter-footer">
+                    <button class="btn btn-secondary" onclick="switchSection('kapitel1')">❮ Zurück</button>
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="chk-chapter-2" class="chapter-read-checkbox" data-chapter="2">
+                        <div class="checkbox-custom"></div>
+                        Als gelesen markieren
+                    </label>
+                    <button class="btn btn-primary" onclick="switchSection('kapitel3')">Kapitel 3: Widerstand ➔</button>
+                </div>
+            </section>
+
+            <!-- ----------------------------------------------------------- -->
+            <!-- CHAPTER 3: RESISTANCE -->
+            <!-- ----------------------------------------------------------- -->
+            <section id="kapitel3" class="content-section">
+                <h2>Kapitel 3: Widerstand & Leitwert (R & G)</h2>
+                <p class="intro-lead">Kein Leiter ist perfekt. Elektronen, die durch ein Kabel fließen, stoßen mit den Atomen des Kabels zusammen. Diese Behinderung nennen wir Widerstand.</p>
+
+                <div class="card">
+                    <h3 style="margin-top:0;">Der elektrische Widerstand R</h3>
+                    <p>Wenn Elektronen durch das Metallgitter wandern, stoßen sie ständig mit den schwingenden Metallatomen zusammen. Dabei gilt:</p>
+                    <ul>
+                        <li>Diese Stöße bremsen die Elektronen ab. Das Material setzt dem Strom einen <strong>Widerstand</strong> entgegen.</li>
+                        <li>Bei den Zusammenstößen geben die Elektronen kinetische Energie ab. Die Atome fangen an, stärker zu schwingen. Der Leiter <strong>erwärmt sich</strong> (thermische Energie).</li>
+                    </ul>
+                    <p>Das Formelzeichen für den Widerstand ist <strong>R</strong>. Die physikalische Einheit ist das <strong>Ohm (Ω)</strong>.</p>
+                </div>
+
+                <!-- Ohm's Law and Triangle -->
+                <div class="card">
+                    <div class="card-title">📐 Das Ohm'sche Gesetz</div>
+                    <p>Das Ohm'sche Gesetz beschreibt das Verhältnis von Spannung, Stromstärke und Widerstand. Es ist die wichtigste Formel für deine Arbeit!</p>
+                    
+                    <div class="ohm-triangle-container">
+                        <svg class="ohm-triangle-svg" viewBox="0 0 240 200">
+                            <!-- Background shadow triangle -->
+                            <polygon points="120,5 235,195 5,195" fill="#F3EFE9" stroke="#EADFD3" stroke-width="2"/>
+                            
+                            <!-- Top Part: U -->
+                            <g class="triangle-part" data-symbol="U">
+                                <path d="M 120,10 L 60,105 L 180,105 Z" fill="#FAF2E9" stroke="#8C6239" stroke-width="2"/>
+                                <text x="120" y="75" font-family="Outfit" font-size="28" font-weight="bold" fill="#3E2E20" text-anchor="middle">U</text>
+                            </g>
+                            
+                            <!-- Bottom Left Part: I -->
+                            <g class="triangle-part" data-symbol="I">
+                                <path d="M 60,105 L 10,190 L 120,190 Z" fill="#FAF2E9" stroke="#8C6239" stroke-width="2"/>
+                                <text x="65" y="160" font-family="Outfit" font-size="28" font-weight="bold" fill="#3E2E20" text-anchor="middle">I</text>
+                            </g>
+                            
+                            <!-- Bottom Right Part: R -->
+                            <g class="triangle-part" data-symbol="R">
+                                <path d="M 180,105 L 120,190 L 230,190 Z" fill="#FAF2E9" stroke="#8C6239" stroke-width="2"/>
+                                <text x="175" y="160" font-family="Outfit" font-size="28" font-weight="bold" fill="#3E2E20" text-anchor="middle">R</text>
+                            </g>
+                            
+                            <!-- Multiplying / division markers -->
+                            <text x="120" y="150" font-family="monospace" font-size="20" font-weight="bold" fill="#8C6239" text-anchor="middle">·</text>
+                            <line x1="60" y1="105" x2="180" y2="105" stroke="#8C6239" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <p style="text-align:center; font-size:0.85rem; color:var(--text-secondary); margin-top:-1rem; margin-bottom:1.5rem;">
+                        <em>Klicke auf einen Buchstaben im Dreieck, um die Formel im Rechner auszuwählen!</em>
+                    </p>
+
+                    <h4>Zusammenhänge:</h4>
+                    <ul>
+                        <li>Die Stromstärke ist zur angelegten Spannung <strong>direkt proportional</strong> (doppelte Spannung = doppelter Strom).</li>
+                        <li>Die Stromstärke ist zum Widerstand <strong>umgekehrt proportional</strong> (doppelter Widerstand = halber Strom).</li>
+                    </ul>
+
+                    <div class="interactive-tool">
+                        <h4 style="margin-top:0;">Interaktiver Ohm'scher Rechner</h4>
+                        <div class="tool-controls">
+                            <div class="form-group">
+                                <label>Was möchtest du berechnen?</label>
+                                <select id="ohm-calc-type">
+                                    <option value="I">Stromstärke I (aus U und R)</option>
+                                    <option value="U">Spannung U (aus R und I)</option>
+                                    <option value="R">Widerstand R (aus U und I)</option>
+                                    <option value="G">Leitwert G (aus U und I)</option>
+                                </select>
+                            </div>
+                            
+                            <div id="ohm-inputs" class="grid-2">
+                                <!-- Inputs dynamically built by JS -->
+                            </div>
+                        </div>
+
+                        <div class="tool-result" id="ohm-result">
+                            <!-- Calculation result here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Conductance G -->
+                <div class="card">
+                    <div class="card-title">⚡ Der elektrische Leitwert G</div>
+                    <p>Ein Bauteil mit einem kleinen Widerstand leitet den Strom besonders gut. Manchmal ist es einfacher, mit der Leitfähigkeit statt dem Widerstand zu rechnen. Dafür gibt es den Leitwert:</p>
+                    <div class="formula-block">
+                        G = 1 / R
+                        <div class="formula-legend">Leitwert G = Kehrwert des Widerstands R</div>
+                    </div>
+                    <p>Das Formelzeichen für den Leitwert ist <strong>G</strong>. Die physikalische Einheit ist das <strong>Siemens (S)</strong>.
+                    Es gilt entsprechend: G = I/U.</p>
+                </div>
+
+                <div class="chapter-footer">
+                    <button class="btn btn-secondary" onclick="switchSection('kapitel2')">❮ Zurück</button>
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="chk-chapter-3" class="chapter-read-checkbox" data-chapter="3">
+                        <div class="checkbox-custom"></div>
+                        Als gelesen markieren
+                    </label>
+                    <button class="btn btn-primary" onclick="switchSection('kapitel4')">Kapitel 4: Leistung ➔</button>
+                </div>
+            </section>
+
+            <!-- ----------------------------------------------------------- -->
+            <!-- CHAPTER 4: ENERGY & POWER -->
+            <!-- ----------------------------------------------------------- -->
+            <section id="kapitel4" class="content-section">
+                <h2>Kapitel 4: Energie, Arbeit & Leistung (W & P)</h2>
+                <p class="intro-lead">Ein Stromkreis dient dazu, Energie von einer Quelle zu einem Verbraucher zu transportieren und dort nutzbar zu machen.</p>
+
+                <div class="card">
+                    <h3 style="margin-top:0;">Elektrische Arbeit & Energie W</h3>
+                    <p>Wenn Elektronen durch eine Lampe fließen und diese zum Leuchten bringen, verrichten sie <strong>elektrische Arbeit</strong>.
+                    Die übertragene Arbeit W hängt davon ab, wie hoch die Spannung U ist, wie viel Strom I fließt und wie lange das Gerät eingeschaltet ist (t):</p>
+                    
+                    <div class="formula-block">
+                        W = U · I · t
+                    </div>
+
+                    <h4>Einheiten der elektrischen Arbeit:</h4>
+                    <ul>
+                        <li>Basiseinheit: <strong>Wattsekunde (Ws)</strong> oder <strong>Joule (J)</strong> oder <strong>Voltampere-Sekunde (VAs)</strong>. Es gilt: 1 Ws = 1 J.</li>
+                        <li>In der Praxis (z.B. Stromzähler): <strong>Wattstunde (Wh)</strong> oder <strong>Kilowattstunde (kWh)</strong>.</li>
+                        <li>Umrechnung: Da eine Stunde 3600 Sekunden hat, gilt:<br>
+                            <strong>1 Wh = 3.600 Ws</strong><br>
+                            <strong>1 kWh = 3.600.000 Ws = 3,6 MWs</strong>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">💡 Energiekosten-Berechnung</div>
+                    <p>Die Energiekosten K berechnen sich aus der verbrauchten Energie W (in kWh) und dem Arbeitspreis k (in € pro kWh):</p>
+                    <div class="formula-block">
+                        Kosten K = W · k
+                    </div>
+                    <p>Dazu kommt oft ein fester, verbrauchsunabhängiger Betrag (der Grundpreis).</p>
+                </div>
+
+                <!-- Electrical Power P -->
+                <div class="card">
+                    <div class="card-title">⚡ Elektrische Leistung P</div>
+                    <p>Die Leistung beschreibt, wie viel Energie in einer bestimmten Zeit umgesetzt wird (P = W / t).
+                    Das Formelzeichen ist <strong>P</strong>. Die Einheit ist das <strong>Watt (W)</strong>.</p>
+                    <div class="formula-block">
+                        P = U · I
+                    </div>
+
+                    <h4>Alternative Formeln (mit Ohm'schem Gesetz kombiniert):</h4>
+                    <p>Falls du die Spannung U oder die Stromstärke I nicht weißt, dafür aber den Widerstand R kennst, kannst du folgende Formeln nutzen:</p>
+                    <div class="grid-2">
+                        <div style="background-color: var(--bg-secondary); padding: 1rem; border-radius: var(--border-radius-md); text-align: center;">
+                            <p style="margin-bottom:0.25rem;"><strong>Falls U unbekannt:</strong></p>
+                            <code style="font-size: 1.25rem; font-weight: bold; color: var(--accent-color);">P = I<sup>2</sup> · R</code>
+                        </div>
+                        <div style="background-color: var(--bg-secondary); padding: 1rem; border-radius: var(--border-radius-md); text-align: center;">
+                            <p style="margin-bottom:0.25rem;"><strong>Falls I unbekannt:</strong></p>
+                            <code style="font-size: 1.25rem; font-weight: bold; color: var(--accent-color);">P = U<sup>2</sup> / R</code>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Power measurement methods -->
+                <div class="card">
+                    <div class="card-title">🔌 Messung der elektrischen Leistung</div>
+                    <p>Es gibt zwei grundlegende Arten, die elektrische Leistung zu bestimmen:</p>
+                    <ol style="padding-left:1.5rem; margin-bottom:1rem;">
+                        <li style="margin-bottom:0.5rem;">
+                            <strong>Indirekte Messung:</strong> Man misst gleichzeitig die Spannung mit einem Voltmeter (parallel) und den Strom mit einem Ammeter (in Reihe). Anschließend multipliziert man beide Werte (P = U · I).
+                        </li>
+                        <li>
+                            <strong>Direkte Messung:</strong> Man verwendet ein <strong>Leistungsmessgerät (Wattmeter)</strong>. Dieses Messgerät besitzt vier Anschlüsse (zwei für die Strompfadmessung und zwei für die Spannungspfadmessung), nimmt beide Werte gleichzeitig auf und zeigt direkt die Leistung in Watt an.
+                        </li>
+                    </ol>
+                </div>
+
+                <div class="chapter-footer">
+                    <button class="btn btn-secondary" onclick="switchSection('kapitel3')">❮ Zurück</button>
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="chk-chapter-4" class="chapter-read-checkbox" data-chapter="4">
+                        <div class="checkbox-custom"></div>
+                        Als gelesen markieren
+                    </label>
+                    <button class="btn btn-primary" onclick="switchSection('kapitel5')">Kapitel 5: Wirkungsgrad ➔</button>
+                </div>
+            </section>
+
+            <!-- ----------------------------------------------------------- -->
+            <!-- CHAPTER 5: EFFICIENCY -->
+            <!-- ----------------------------------------------------------- -->
+            <section id="kapitel5" class="content-section">
+                <h2>Kapitel 5: Wirkungsgrad (η)</h2>
+                <p class="intro-lead">In der Praxis gibt es keine perfekte Energieumwandlung. Jedes Mal, wenn Energie umgeformt wird, geht ein Teil als unerwünschte Wärme verloren.</p>
+
+                <div class="card">
+                    <h3 style="margin-top:0;">Das Verlustprinzip</h3>
+                    <p>Ein Elektromotor soll elektrische Energie in mechanische Bewegung umwandeln. Doch im Betrieb stellt man fest: Der Motor wird warm und summt laut.
+                    Diese Wärme und das Geräusch sind <strong>Verlustleistungen</strong>, da sie nicht der gewollten Funktion dienen.</p>
+                    <p>Es gilt das Prinzip der Energieerhaltung:</p>
+                    <div class="formula-block" style="font-size: 1.15rem;">
+                        P<sub>zu</sub> = P<sub>ab</sub> + P<sub>verlust</sub>
+                    </div>
+                    <ul>
+                        <li><strong>P<sub>zu</sub> (zugeführte Leistung):</strong> Die elektrische Leistung, die wir in das Gerät einspeisen (z.B. aus der Steckdose).</li>
+                        <li><strong>P<sub>ab</sub> (abgegebene Leistung):</strong> Die tatsächlich nutzbare Leistung (z.B. die mechanische Drehkraft an der Welle des Motors).</li>
+                        <li><strong>P<sub>verlust</sub> (Verlustleistung):</strong> Die Leistung, die durch Wärme, Reibung oder Schwingung verloren geht.</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">📊 Der Wirkungsgrad η (eta)</div>
+                    <p>Der Wirkungsgrad beschreibt die Effizienz eines Geräts. Er gibt an, wie viel Prozent der zugeführten Leistung tatsächlich in nutzbare Leistung umgewandelt werden.</p>
+                    <div class="formula-block">
+                        η = P<sub>ab</sub> / P<sub>zu</sub>
+                        <div class="formula-legend">Wirkungsgrad η ist immer kleiner als 1 (bzw. kleiner als 100%)</div>
+                    </div>
+                    <p>Der Wirkungsgrad hat <strong>keine physikalische Einheit</strong>, sondern ist eine reine Verhältniszahl. Er wird meistens in Prozent (%) angegeben.</p>
+                    
+                    <div class="info-box success" style="margin-top: 1.5rem;">
+                        <span class="info-box-icon">💡</span>
+                        <div class="info-box-content">
+                            <h5>Beispielrechnung (aus PDF):</h5>
+                            <p style="margin-bottom:0.5rem;">Ein Gleichrichtergerät nimmt eingangsseitig 200 W auf (P_zu) und liefert ausgangsseitig bei einer Spannung von 24 V einen Strom von 7 A (P_ab). Wie groß ist der Wirkungsgrad?</p>
+                            <ol style="padding-left:1.25rem; font-size:0.9rem;">
+                                <li>Abgegebene Leistung berechnen: P_ab = U · I = 24 V · 7 A = 168 W.</li>
+                                <li>Formel anwenden: η = P<sub>ab</sub> / P<sub>zu</sub> = 168 W / 200 W = 0,84.</li>
+                                <li>In Prozent angeben: 0,84 · 100% = <strong>84%</strong>.</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chapter-footer">
+                    <button class="btn btn-secondary" onclick="switchSection('kapitel4')">❮ Zurück</button>
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="chk-chapter-5" class="chapter-read-checkbox" data-chapter="5">
+                        <div class="checkbox-custom"></div>
+                        Als gelesen markieren
+                    </label>
+                    <button class="btn btn-primary" onclick="switchSection('kapitel6')">Kapitel 6: Leitungswiderstand ➔</button>
+                </div>
+            </section>
+
+            <!-- ----------------------------------------------------------- -->
+            <!-- CHAPTER 6: LINE RESISTANCE -->
+            <!-- ----------------------------------------------------------- -->
+            <section id="kapitel6" class="content-section">
+                <h2>Kapitel 6: Der Leitungswiderstand (RL)</h2>
+                <p class="intro-lead">Ein Kabel leitet den Strom zwar gut, hat aber dennoch einen kleinen Eigenwiderstand. Dieser Widerstand wird durch die Geometrie und das Material bestimmt.</p>
+
+                <div class="card">
+                    <h3 style="margin-top:0;">Wovon hängt der Leitungswiderstand ab?</h3>
+                    <p>Stell dir den Stromfluss wie fließende Autos auf einer Autobahn vor:</p>
+                    <ul>
+                        <li><strong>Drahtlänge (l):</strong> Je länger das Kabel, desto länger müssen sich die Elektronen durch das Atomgitter kämpfen. Der Widerstand steigt. <br><strong>R<sub>L</sub> ist direkt proportional zur Länge l.</strong></li>
+                        <li><strong>Querschnitt (A):</strong> Ein breiterer Draht bietet den Elektronen mehr Platz, um einander auszuweichen. Der Widerstand sinkt. <br><strong>R<sub>L</sub> ist umgekehrt proportional zum Querschnitt A.</strong></li>
+                        <li><strong>Leiterwerkstoff:</strong> Manche Metalle (wie Silber oder Kupfer) leiten von Natur aus besser als andere (wie Aluminium oder Eisen). Das wird durch die Konstante des Materials bestimmt:
+                            <ul>
+                                <li><strong>Spezifischer Widerstand ρ (rho):</strong> Der Widerstand eines Drahtes von 1 m Länge und 1 mm² Querschnitt. Einheit: Ω·mm²/m.</li>
+                                <li><strong>Spezifische Leitfähigkeit χ (kappa):</strong> Der Kehrwert von ρ. Gibt an, wie gut das Material leitet. Einheit: m/(Ω·mm²). Es gilt χ = 1 / ρ.</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <div class="formula-block">
+                        R<sub>L</sub> = ρ · (l / A) &nbsp;&nbsp;&nbsp; oder &nbsp;&nbsp;&nbsp; R<sub>L</sub> = l / (χ · A)
+                    </div>
+                </div>
+
+                <!-- Interactive Line resistance calculator -->
+                <div class="card">
+                    <div class="card-title">🔌 Leitungswiderstands-Rechner & Materialvergleich</div>
+                    <p>Hier kannst du den Leitungswiderstand verschiedener Drähte berechnen und vergleichen. Du kannst auch einen Strom eintragen, um den Spannungsabfall zu ermitteln.</p>
+                    
+                    <div class="interactive-tool">
+                        <div class="tool-controls">
+                            <div class="grid-2">
+                                <div class="form-group">
+                                    <label>Leitermaterial</label>
+                                    <select id="line-material">
+                                        <option value="copper">Kupfer (χ = 56)</option>
+                                        <option value="aluminum">Aluminium (χ = 35)</option>
+                                        <option value="silver">Silber (χ = 62)</option>
+                                        <option value="gold">Gold (χ = 45)</option>
+                                        <option value="iron">Eisen (χ = 10)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Drahtlänge l (m)</label>
+                                    <input type="number" id="line-length" value="27" step="any">
+                                </div>
+                            </div>
+                            <div class="grid-2">
+                                <div class="form-group">
+                                    <label>Querschnitt A (mm²)</label>
+                                    <input type="number" id="line-area" value="4.0" step="any">
+                                </div>
+                                <div class="form-group">
+                                    <label>Fließender Strom I (A) (Optional)</label>
+                                    <input type="number" id="line-current" value="5" step="any" placeholder="z.B. 5">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tool-result" id="line-result">
+                            <!-- JS will generate line calc result -->
+                        </div>
+                    </div>
+
+                    <div class="info-box info" style="margin-top: 1.5rem;">
+                        <span class="info-box-icon">💡</span>
+                        <div class="info-box-content">
+                            <h5>Kupfer vs. Aluminium (Wichtige PDF-Übungsaufgabe):</h5>
+                            <p style="margin-bottom:0.5rem;">Wenn ein Kupferdraht und ein Aluminiumdraht denselben Widerstand (120 mΩ) und dieselbe Länge (27 m) haben sollen, wie groß müssen ihre Querschnitte sein?</p>
+                            <p style="margin-bottom:0; font-size:0.9rem;">
+                                Kupfer (χ = 56): A_Cu = 27 / 56 · 0,12 ≈ <strong>4,02 mm²</strong><br>
+                                Aluminium (χ = 35): A_Al = 27 / 35 · 0,12 ≈ <strong>6,43 mm²</strong><br>
+                                <em>Ergebnis:</em> Der Aluminiumleiter muss also ca. <strong>60% dicker</strong> sein als der Kupferleiter, da Aluminium schlechter leitet.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chapter-footer">
+                    <button class="btn btn-secondary" onclick="switchSection('kapitel5')">❮ Zurück</button>
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="chk-chapter-6" class="chapter-read-checkbox" data-chapter="6">
+                        <div class="checkbox-custom"></div>
+                        Als gelesen markieren
+                    </label>
+                    <button class="btn btn-primary" onclick="switchSection('kapitel7')">Kapitel 7: Wechselstrom ➔</button>
+                </div>
+            </section>
+
+            <!-- ----------------------------------------------------------- -->
+            <!-- CHAPTER 7: ALTERNATING CURRENT -->
+            <!-- ----------------------------------------------------------- -->
+            <section id="kapitel7" class="content-section">
+                <h2>Kapitel 7: Stromarten & Wechselstrom (AC)</h2>
+                <p class="intro-lead">Bisher sind wir davon ausgegangen, dass Strom stetig in eine Richtung fließt (Gleichstrom). Doch aus unserer Steckdose kommt Wechselstrom. Was bedeutet das?</p>
+
+                <div class="card">
+                    <h3 style="margin-top:0;">Gleichstrom (DC) vs. Wechselstrom (AC)</h3>
+                    <ul>
+                        <li><strong>Gleichstrom (Direct Current - DC):</strong> Behält mit fortschreitender Zeit sowohl seine Stärke als auch seine Richtung bei. Die Polarität bleibt konstant. <br><em>Beispiele:</em> Batterien, Solarzellen, USB-Anschlüsse.</li>
+                        <li><strong>Wechselstrom (Alternating Current - AC):</strong> Ändert seine Fließrichtung (Polarität) periodisch. Zudem ändert sich die Stromstärke fortlaufend. Der arithmetische Mittelwert einer Schwingung ist Null, da die positive Halbwelle genau so groß ist wie die negative. <br><em>Beispiel:</em> Stromnetz der EVU (sinusförmig).</li>
+                    </ul>
+                </div>
+
+                <!-- Sinusoidal parameters -->
+                <div class="card">
+                    <div class="card-title">📈 Kenngrößen des sinusförmigen Wechselstroms</div>
+                    <p>Ein sinusförmiger Wechselstrom besitzt charakteristische Messgrößen, die du kennen musst:</p>
+                    <ul>
+                        <li><strong>Augenblickswert (i):</strong> Der aktuelle Wert der Spannung oder des Stroms zu einem ganz bestimmten Zeitpunkt.</li>
+                        <li><strong>Maximalwert / Spitzenwert (î oder U<sub>max</sub>):</strong> Der höchste Ausschlag (die Amplitude) der Schwingung.</li>
+                        <li><strong>Spitze-Spitze-Wert (i<sub>ss</sub> oder U<sub>ss</sub>):</strong> Der Abstand vom positiven Maximum zum negativen Minimum. Es gilt: <strong>i_ss = 2 · î</strong>.</li>
+                        <li><strong>Periodendauer (T):</strong> Die Zeit in Sekunden (s), die für eine vollständige Schwingung (eine positive + eine negative Halbwelle) benötigt wird.</li>
+                        <li><strong>Frequenz (f):</strong> Die Anzahl der Schwingungen pro Sekunde. Die Einheit ist das <strong>Hertz (Hz)</strong>. Es gilt:
+                            <div class="formula-block" style="margin: 0.5rem auto; width: 50%; font-size:1.15rem;">
+                                f = 1 / T &nbsp;&nbsp;&nbsp; bzw. &nbsp;&nbsp;&nbsp; T = 1 / f
+                            </div>
+                        </li>
+                        <li><strong>Effektivwert (I<sub>eff</sub> oder U<sub>eff</sub>):</strong> Gibt den Wert an, den ein entsprechender Gleichstrom haben müsste, um die gleiche Wärmeleistung an einem Widerstand zu erzeugen. Für sinusförmige Signale gilt:
+                            <div class="formula-block" style="margin: 0.5rem auto; width: 50%; font-size:1.15rem;">
+                                U<sub>eff</sub> = U<sub>max</sub> / √2 ≈ 0,707 · U<sub>max</sub>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Oscilloscope simulator widget -->
+                <div class="card">
+                    <div class="card-title">🔬 Interaktives Oszilloskop-Modell</div>
+                    <p>Bewege die Regler für Amplitude (Spitzenwert) und Frequenz und beobachte, wie sich die Sinuskurve verändert. Die wichtigsten Kenngrößen werden live berechnet.</p>
+                    
+                    <div class="scope-simulation">
+                        <div class="canvas-container">
+                            <canvas id="scope-canvas" class="scope-canvas"></canvas>
+                        </div>
+                        <div class="scope-controls">
+                            <div class="slider-group">
+                                <label>Amplitude (Spitzenspannung U<sub>max</sub>)</label>
+                                <input type="range" id="scope-amp" min="10" max="325" value="325">
+                            </div>
+                            <div class="slider-group">
+                                <label>Frequenz (f)</label>
+                                <input type="range" id="scope-freq" min="20" max="200" value="50">
+                            </div>
+                            
+                            <h4 style="margin-top: 1rem; margin-bottom: 0.5rem;">Messwerte:</h4>
+                            <div class="scope-readout">
+                                <div class="readout-card">
+                                    <label>Maximalwert U<sub>max</sub></label>
+                                    <span id="scope-readout-umax">325 V</span>
+                                </div>
+                                <div class="readout-card">
+                                    <label>Effektivwert U<sub>eff</sub></label>
+                                    <span id="scope-readout-ueff">230.0 V</span>
+                                </div>
+                                <div class="readout-card">
+                                    <label>Frequenz f</label>
+                                    <span id="scope-readout-f">50 Hz</span>
+                                </div>
+                                <div class="readout-card">
+                                    <label>Periodendauer T</label>
+                                    <span id="scope-readout-t">20.00 ms</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chapter-footer">
+                    <button class="btn btn-secondary" onclick="switchSection('kapitel6')">❮ Zurück</button>
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="chk-chapter-7" class="chapter-read-checkbox" data-chapter="7">
+                        <div class="checkbox-custom"></div>
+                        Als gelesen markieren
+                    </label>
+                    <button class="btn btn-primary" onclick="switchSection('aufgaben')">Zu den Übungsaufgaben ➔</button>
+                </div>
+            </section>
+
+            <!-- ----------------------------------------------------------- -->
+            <!-- EXERCISES FROM PDFS -->
+            <!-- ----------------------------------------------------------- -->
+            <section id="aufgaben" class="content-section">
+                <h2>Übungsaufgaben aus den Arbeitsblättern</h2>
+                <p class="intro-lead">Hier findest du die originalen Übungsaufgaben aus den ausgeteilten PDFs. Rechne sie selbstständig durch, trage dein Ergebnis ein und vergleiche es.</p>
+
+                <!-- Exercise 1 -->
+                <div class="card">
+                    <div class="exercise-badge pending" id="badge-ex1">Ungelöst</div>
+                    <h4 style="margin-top:0;">Aufgabe 1: Heizlüfter (Blatt 24)</h4>
+                    <p>Die Heizspirale eines Heizlüfters für 230 V hat einen Widerstand von 40 Ω. Berechnen Sie den Strom durch den Heizlüfter.</p>
+                    <div class="exercise-solve-box">
+                        <div class="exercise-input-row">
+                            <input type="text" id="input-ex1" placeholder="Ergebnis in Ampere (z.B. 2.5)">
+                            <button class="btn btn-primary" id="btn-check-ex1" onclick="checkExercise('ex1')">Prüfen</button>
+                        </div>
+                        <div id="feedback-ex1"></div>
+                        <button class="btn btn-secondary" style="font-size:0.8rem; padding:0.4rem 0.8rem; width:fit-content;" onclick="toggleSolution('ex1')">Lösungsweg anzeigen</button>
+                        <div class="solution-path" id="solution-ex1">
+                            <p><strong>Gegeben:</strong> U = 230 V, R = 40 Ω</p>
+                            <p><strong>Gesucht:</strong> I (Stromstärke in A)</p>
+                            <p><strong>Rechnung:</strong></p>
+                            <div class="calc-step">I = U / R = 230 V / 40 Ω = 5,75 A</div>
+                            <p>Der Strom durch den Heizlüfter beträgt <strong>5,75 A</strong>.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Exercise 2 -->
+                <div class="card">
+                    <div class="exercise-badge pending" id="badge-ex2">Ungelöst</div>
+                    <h4 style="margin-top:0;">Aufgabe 2: Klemmen-Übergangswiderstand (Blatt 24)</h4>
+                    <p>Eine Anschlussklemme hat einen Übergangswiderstand von 8 mΩ. Welche Spannung fällt am Übergangswiderstand ab, wenn ein Strom von 16 A fließt?</p>
+                    <div class="exercise-solve-box">
+                        <div class="exercise-input-row">
+                            <input type="text" id="input-ex2" placeholder="Ergebnis in Millivolt (z.B. 50)">
+                            <button class="btn btn-primary" id="btn-check-ex2" onclick="checkExercise('ex2')">Prüfen</button>
+                        </div>
+                        <div id="feedback-ex2"></div>
+                        <button class="btn btn-secondary" style="font-size:0.8rem; padding:0.4rem 0.8rem; width:fit-content;" onclick="toggleSolution('ex2')">Lösungsweg anzeigen</button>
+                        <div class="solution-path" id="solution-ex2">
+                            <p><strong>Gegeben:</strong> R = 8 mΩ = 0,008 Ω, I = 16 A</p>
+                            <p><strong>Gesucht:</strong> U (Spannung in V bzw. mV)</p>
+                            <p><strong>Rechnung:</strong></p>
+                            <div class="calc-step">U = R · I = 0,008 Ω · 16 A = 0,128 V = 128 mV</div>
+                            <p>Die abfallende Spannung beträgt <strong>128 mV</strong> (oder 0,128 V).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Exercise 3 -->
+                <div class="card">
+                    <div class="exercise-badge pending" id="badge-ex3">Ungelöst</div>
+                    <h4 style="margin-top:0;">Aufgabe 3: Bügeleisen-Netzschwankung (Blatt 24)</h4>
+                    <p>Ein Bügeleisen nimmt an der Spannung 230 V einen Strom I = 4,35 A auf. Wie groß ist die Stromaufnahme, wenn die Spannung um 5 % steigt?</p>
+                    <div class="exercise-solve-box">
+                        <div class="exercise-input-row">
+                            <input type="text" id="input-ex3" placeholder="Ergebnis in Ampere (z.B. 1.2)">
+                            <button class="btn btn-primary" id="btn-check-ex3" onclick="checkExercise('ex3')">Prüfen</button>
+                        </div>
+                        <div id="feedback-ex3"></div>
+                        <button class="btn btn-secondary" style="font-size:0.8rem; padding:0.4rem 0.8rem; width:fit-content;" onclick="toggleSolution('ex3')">Lösungsweg anzeigen</button>
+                        <div class="solution-path" id="solution-ex3">
+                            <p><strong>Gegeben:</strong> U<sub>1</sub> = 230 V, I<sub>1</sub> = 4,35 A, Spannungsanstieg um 5 % (U<sub>2</sub> = 230 · 1,05 = 241,5 V)</p>
+                            <p><strong>Gesucht:</strong> I<sub>2</sub> (neue Stromaufnahme)</p>
+                            <p><strong>Rechnung:</strong></p>
+                            <p>Da der Widerstand R des Bügeleisens gleich bleibt, gilt Proportionalität:</p>
+                            <div class="calc-step">I2 = I1 · 1,05 = 4,35 A · 1,05 = 4,5675 A ≈ 4,57 A</div>
+                            <p>Die Stromaufnahme steigt auf <strong>4,57 A</strong>.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Exercise 4 -->
+                <div class="card">
+                    <div class="exercise-badge pending" id="badge-ex4">Ungelöst</div>
+                    <h4 style="margin-top:0;">Aufgabe 4: Relais-Fehlanbindung (Blatt 24)</h4>
+                    <p>Ein Relais mit den Nennangaben 6 V / 50 mA wird versehentlich an eine Spannung von 9 V angeschlossen. Berechnen Sie die Stromaufnahme bei U = 9 V.</p>
+                    <div class="exercise-solve-box">
+                        <div class="exercise-input-row">
+                            <input type="text" id="input-ex4" placeholder="Ergebnis in Milliampere (z.B. 20)">
+                            <button class="btn btn-primary" id="btn-check-ex4" onclick="checkExercise('ex4')">Prüfen</button>
+                        </div>
+                        <div id="feedback-ex4"></div>
+                        <button class="btn btn-secondary" style="font-size:0.8rem; padding:0.4rem 0.8rem; width:fit-content;" onclick="toggleSolution('ex4')">Lösungsweg anzeigen</button>
+                        <div class="solution-path" id="solution-ex4">
+                            <p><strong>Gegeben:</strong> Nennwerte U_nenn = 6 V, I_nenn = 50 mA = 0,05 A. Tatsächliche Spannung U = 9 V.</p>
+                            <p><strong>Gesucht:</strong> Spulenwiderstand R und Stromaufnahme I_neu bei 9 V.</p>
+                            <p><strong>Rechnung:</strong></p>
+                            <ol style="padding-left: 1.25rem;">
+                                <li>Spulenwiderstand R berechnen:
+                                    <div class="calc-step">R = Unenn / Inenn = 6 V / 0,05 A = 120 Ω</div>
+                                </li>
+                                <li>Leitwert G berechnen:
+                                    <div class="calc-step">G = 1 / R = 1 / 120 Ω ≈ 8,33 mS</div>
+                                </li>
+                                <li>Strom bei 9 V berechnen:
+                                    <div class="calc-step">Ineu = U / R = 9 V / 120 Ω = 0,075 A = 75 mA</div>
+                                </li>
+                            </ol>
+                            <p>Die Stromaufnahme bei 9 V beträgt <strong>75 mA</strong>.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Exercise 5 -->
+                <div class="card">
+                    <div class="exercise-badge pending" id="badge-ex5">Ungelöst</div>
+                    <h4 style="margin-top:0;">Aufgabe 5: Heizwiderstand & Leitwert (Blatt 24)</h4>
+                    <p>Ein Heizwiderstand mit Leitwert G = 40 mS ist an U = 230 V angeschlossen. Ermitteln Sie rechnerisch, welche Spannung erforderlich ist, damit ein Strom von I = 6 A fließt.</p>
+                    <div class="exercise-solve-box">
+                        <div class="exercise-input-row">
+                            <input type="text" id="input-ex5" placeholder="Ergebnis in Volt (z.B. 12)">
+                            <button class="btn btn-primary" id="btn-check-ex5" onclick="checkExercise('ex5')">Prüfen</button>
+                        </div>
+                        <div id="feedback-ex5"></div>
+                        <button class="btn btn-secondary" style="font-size:0.8rem; padding:0.4rem 0.8rem; width:fit-content;" onclick="toggleSolution('ex5')">Lösungsweg anzeigen</button>
+                        <div class="solution-path" id="solution-ex5">
+                            <p><strong>Gegeben:</strong> G = 40 mS = 0,04 S, gewollter Strom I = 6 A.</p>
+                            <p><strong>Gesucht:</strong> U (erforderliche Spannung)</p>
+                            <p><strong>Rechnung:</strong></p>
+                            <p>Da G = I / U, stellen wir nach U um:</p>
+                            <div class="calc-step">U = I / G = 6 A / 0,04 S = 150 V</div>
+                            <p>Es wird eine Spannung von <strong>150 V</strong> benötigt.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Exercise 6 -->
+                <div class="card">
+                    <div class="exercise-badge pending" id="badge-ex6">Ungelöst</div>
+                    <h4 style="margin-top:0;">Aufgabe 6: Leitwert-Berechnung (Blatt 31)</h4>
+                    <p>Berechnen Sie den elektrischen Leitwert G in Milli-Siemens (mS) für einen Festwiderstand von R = 30 Ω.</p>
+                    <div class="exercise-solve-box">
+                        <div class="exercise-input-row">
+                            <input type="text" id="input-ex6" placeholder="Ergebnis in mS (z.B. 10)">
+                            <button class="btn btn-primary" id="btn-check-ex6" onclick="checkExercise('ex6')">Prüfen</button>
+                        </div>
+                        <div id="feedback-ex6"></div>
+                        <button class="btn btn-secondary" style="font-size:0.8rem; padding:0.4rem 0.8rem; width:fit-content;" onclick="toggleSolution('ex6')">Lösungsweg anzeigen</button>
+                        <div class="solution-path" id="solution-ex6">
+                            <p><strong>Gegeben:</strong> R = 30 Ω</p>
+                            <p><strong>Gesucht:</strong> Leitwert G</p>
+                            <p><strong>Rechnung:</strong></p>
+                            <div class="calc-step">G = 1 / R = 1 / 30 Ω ≈ 0,03333 S = 33,33 mS</div>
+                            <p>Der Leitwert beträgt ca. <strong>33,3 mS</strong>.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Exercise 7 -->
+                <div class="card">
+                    <div class="exercise-badge pending" id="badge-ex7">Ungelöst</div>
+                    <h4 style="margin-top:0;">Aufgabe 7: Widerstands-Berechnung aus Leitwert (Blatt 31)</h4>
+                    <p>Berechnen Sie den Widerstand R in Ohm (Ω) für ein Bauelement mit dem Leitwert G = 8 mS.</p>
+                    <div class="exercise-solve-box">
+                        <div class="exercise-input-row">
+                            <input type="text" id="input-ex7" placeholder="Ergebnis in Ohm (z.B. 50)">
+                            <button class="btn btn-primary" id="btn-check-ex7" onclick="checkExercise('ex7')">Prüfen</button>
+                        </div>
+                        <div id="feedback-ex7"></div>
+                        <button class="btn btn-secondary" style="font-size:0.8rem; padding:0.4rem 0.8rem; width:fit-content;" onclick="toggleSolution('ex7')">Lösungsweg anzeigen</button>
+                        <div class="solution-path" id="solution-ex7">
+                            <p><strong>Gegeben:</strong> G = 8 mS = 0,008 S</p>
+                            <p><strong>Gesucht:</strong> Widerstand R</p>
+                            <p><strong>Rechnung:</strong></p>
+                            <div class="calc-step">R = 1 / G = 1 / 0,008 S = 125 Ω</div>
+                            <p>Der Widerstand beträgt <strong>125 Ω</strong>.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Exercise 8 -->
+                <div class="card">
+                    <div class="exercise-badge pending" id="badge-ex8">Ungelöst</div>
+                    <h4 style="margin-top:0;">Aufgabe 8: Energie-Umrechnung (Blatt 31)</h4>
+                    <p>Rechnen Sie den Energiewert von 11 Wh in die Basiseinheit Wattsekunden (Ws) um.</p>
+                    <div class="exercise-solve-box">
+                        <div class="exercise-input-row">
+                            <input type="text" id="input-ex8" placeholder="Ergebnis in Ws (z.B. 7200)">
+                            <button class="btn btn-primary" id="btn-check-ex8" onclick="checkExercise('ex8')">Prüfen</button>
+                        </div>
+                        <div id="feedback-ex8"></div>
+                        <button class="btn btn-secondary" style="font-size:0.8rem; padding:0.4rem 0.8rem; width:fit-content;" onclick="toggleSolution('ex8')">Lösungsweg anzeigen</button>
+                        <div class="solution-path" id="solution-ex8">
+                            <p><strong>Gegeben:</strong> W = 11 Wh</p>
+                            <p><strong>Gesucht:</strong> Arbeit W in Ws</p>
+                            <p><strong>Rechnung:</strong></p>
+                            <p>Da 1 Stunde 3600 Sekunden hat, rechnen wir:</p>
+                            <div class="calc-step">W = 11 Wh · 3600 s/h = 39.600 Ws (oder Joule)</div>
+                            <p>Der Wert beträgt <strong>39.600 Ws</strong>.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Exercise 9 -->
+                <div class="card">
+                    <div class="exercise-badge pending" id="badge-ex9">Ungelöst</div>
+                    <h4 style="margin-top:0;">Aufgabe 9: Leitung-Querschnittszunahme (Blatt 34)</h4>
+                    <p>Ein Kupferdraht (χ_Cu = 56) und ein Aluminiumdraht (χ_Al = 35) haben denselben Widerstand von 120 mΩ und dieselbe Länge von 27 m. Berechnen Sie die notwendige Querschnittszunahme Δ A des Aluminiumdrahts im Vergleich zum Kupferdraht.</p>
+                    <div class="exercise-solve-box">
+                        <div class="exercise-input-row">
+                            <input type="text" id="input-ex9" placeholder="Ergebnis in mm² (z.B. 2.5)">
+                            <button class="btn btn-primary" id="btn-check-ex9" onclick="checkExercise('ex9')">Prüfen</button>
+                        </div>
+                        <div id="feedback-ex9"></div>
+                        <button class="btn btn-secondary" style="font-size:0.8rem; padding:0.4rem 0.8rem; width:fit-content;" onclick="toggleSolution('ex9')">Lösungsweg anzeigen</button>
+                        <div class="solution-path" id="solution-ex9">
+                            <p><strong>Gegeben:</strong> l = 27 m, R = 120 mΩ = 0,12 Ω, χ_Cu = 56, χ_Al = 35.</p>
+                            <p><strong>Gesucht:</strong> Differenz der Querschnitte Δ A = A_Al - A_Cu.</p>
+                            <p><strong>Rechnung:</strong></p>
+                            <ol style="padding-left: 1.25rem;">
+                                <li>Kupfer-Querschnitt berechnen:
+                                    <div class="calc-step">A_Cu = l / (χ_Cu · R) = 27 / (56 · 0,12) ≈ 4,0179 mm²</div>
+                                </li>
+                                <li>Aluminium-Querschnitt berechnen:
+                                    <div class="calc-step">A_Al = l / (χ_Al · R) = 27 / (35 · 0,12) ≈ 6,4286 mm²</div>
+                                </li>
+                                <li>Zunahme berechnen:
+                                    <div class="calc-step">ΔA = A_Al - A_Cu = 6,4286 - 4,0179 = 2,4107 mm²</div>
+                                </li>
+                            </ol>
+                            <p>Der Aluminiumleiter muss um <strong>2,41 mm²</strong> dicker sein als der Kupferleiter (das entspricht einer Zunahme von genau 60 %).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Exercise 10 -->
+                <div class="card">
+                    <div class="exercise-badge pending" id="badge-ex10">Ungelöst</div>
+                    <h4 style="margin-top:0;">Aufgabe 10: Oszilloskop-Periodendauer (Blatt 37)</h4>
+                    <p>Ein Tongenerator erzeugt eine Sinusfrequenz von 22 kHz. Welche Periodendauer T (in µs) hat dieses Signal?</p>
+                    <div class="exercise-solve-box">
+                        <div class="exercise-input-row">
+                            <input type="text" id="input-ex10" placeholder="Ergebnis in µs (z.B. 20.5)">
+                            <button class="btn btn-primary" id="btn-check-ex10" onclick="checkExercise('ex10')">Prüfen</button>
+                        </div>
+                        <div id="feedback-ex10"></div>
+                        <button class="btn btn-secondary" style="font-size:0.8rem; padding:0.4rem 0.8rem; width:fit-content;" onclick="toggleSolution('ex10')">Lösungsweg anzeigen</button>
+                        <div class="solution-path" id="solution-ex10">
+                            <p><strong>Gegeben:</strong> f = 22 kHz = 22.000 Hz</p>
+                            <p><strong>Gesucht:</strong> Periodendauer T in Sekunden bzw. Mikrosekunden.</p>
+                            <p><strong>Rechnung:</strong></p>
+                            <div class="calc-step">T = 1 / f = 1 / 22.000 Hz ≈ 0,00004545 s = 45,45 µs</div>
+                            <p>Die Periodendauer beträgt <strong>45,45 µs</strong>.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ----------------------------------------------------------- -->
+            <!-- QUIZ SECTION -->
+            <!-- ----------------------------------------------------------- -->
+            <section id="quiz" class="content-section">
+                <h2>Das Übungs-Quiz zur Klassenarbeit</h2>
+                <p class="intro-lead">Teste dein Wissen unter realistischen Bedingungen. Das Quiz wählt zufällig 10 Fragen aus dem gesamten Lernstoff.</p>
+
+                <!-- Welcome Screen -->
+                <div id="quiz-welcome-sec" class="quiz-welcome card">
+                    <div class="quiz-icon">📝</div>
+                    <h3>Bereit für den Test?</h3>
+                    <p>Beantworte 10 Fragen. Nach jeder Antwort erfährst du sofort, ob sie richtig war, und erhältst eine ausführliche Erklärung des Rechenwegs.</p>
+                    <button class="btn btn-primary" onclick="startQuiz()">Quiz jetzt starten</button>
+
+                    <!-- History / Stats -->
+                    <div style="margin-top: 3rem; text-align: left; border-top: 1px solid var(--accent-light); padding-top: 1.5rem;">
+                        <h4 style="margin-top: 0;">Deine letzten Versuche:</h4>
+                        <ul id="quiz-history-list" class="history-list">
+                            <!-- JS builds this dynamically -->
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Play Screen -->
+                <div id="quiz-play-sec" style="display: none;">
+                    <div class="quiz-header-bar">
+                        <span id="quiz-q-count">Frage 1 von 10</span>
+                    </div>
+                    <div class="quiz-progress-bar">
+                        <div class="quiz-progress-fill" id="quiz-progress-fill"></div>
+                    </div>
+
+                    <div class="quiz-card">
+                        <div class="quiz-question" id="quiz-question">Fragetext hier...</div>
+                        <div class="quiz-options" id="quiz-options">
+                            <!-- JS builds options here -->
+                        </div>
+
+                        <!-- Feedback Box -->
+                        <div class="quiz-feedback" id="quiz-feedback">
+                            <div id="quiz-explanation">Erklärungstext...</div>
+                        </div>
+
+                        <div class="quiz-actions">
+                            <button class="btn btn-primary" id="btn-quiz-next" onclick="handleQuizNext()" disabled>Überprüfen</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Results Screen -->
+                <div id="quiz-result-sec" class="quiz-results-summary card" style="display: none;">
+                    <div class="quiz-icon">🏆</div>
+                    <h3>Testergebnis</h3>
+                    <p id="quiz-tier" class="quiz-score-tier">Echte(r) Elektrotechniker(in)!</p>
+                    
+                    <div class="score-ring-container">
+                        <svg class="score-ring-svg">
+                            <circle class="score-ring-circle-bg" cx="70" cy="70" r="60"></circle>
+                            <circle class="score-ring-circle" id="score-ring-circle" cx="70" cy="70" r="60" stroke-dasharray="376.99" stroke-dashoffset="0"></circle>
+                        </svg>
+                        <div class="score-ring-value" id="score-ring-value">10/10</div>
+                    </div>
+
+                    <p id="quiz-stats" style="margin-bottom: 2rem;">Du hast 100% der Fragen richtig beantwortet.</p>
+
+                    <div style="display: flex; gap: 1rem; justify-content: center;">
+                        <button class="btn btn-primary" onclick="startQuiz()">Nochmal versuchen</button>
+                        <button class="btn btn-secondary" onclick="resetQuiz()">Zurück zur Übersicht</button>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Script imports -->
+    <script src="quiz.js"></script>
+    <script src="app.js"></script>
+    
+    <!-- Unit Converter logic inline helper -->
+    <script>
+        function runUnitConvert() {
+            const valInput = document.getElementById('conv-val');
+            const fromSelect = document.getElementById('conv-from');
+            const toSelect = document.getElementById('conv-to');
+            const resultDiv = document.getElementById('conv-result');
+
+            if (!valInput || !fromSelect || !toSelect || !resultDiv) return;
+
+            const val = parseFloat(valInput.value);
+            const from = fromSelect.value;
+            const to = toSelect.value;
+
+            if (isNaN(val)) {
+                resultDiv.innerHTML = 'Bitte trag einen gültigen Zahlenwert ein.';
+                return;
+            }
+
+            const factors = {
+                'M': 1e6,
+                'k': 1e3,
+                '': 1,
+                'm': 1e-3,
+                'u': 1e-6
+            };
+
+            const labels = {
+                'M': 'M',
+                'k': 'k',
+                '': '',
+                'm': 'm',
+                'u': 'µ'
+            };
+
+            // Convert to base unit
+            const valInBase = val * factors[from];
+            // Convert to target unit
+            const valInTarget = valInBase / factors[to];
+
+            // Render result nicely
+            let formattedTarget = valInTarget.toLocaleString('de-DE', { maximumFractionDigits: 6 });
+            resultDiv.innerHTML = '<strong>Ergebnis:</strong> ' + val + ' ' + labels[from] + ' = <strong>' + formattedTarget + ' ' + labels[to] + '</strong>';
+        }
+    </script>
+</body>
+</html>
